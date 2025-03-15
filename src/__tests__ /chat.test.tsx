@@ -1,7 +1,7 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import axios from "axios";
-import Chat from "../app/page";
+import Chat from "../app/chat/page";
 
 jest.mock("axios");
 

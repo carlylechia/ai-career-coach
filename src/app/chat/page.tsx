@@ -60,7 +60,7 @@ export default function Chat() {
           ⬅
         </Link>
       </div>
-      <h1 className="text-3xl font-semibold mb-6">AI Career & Mindset Coach</h1>
+      <h1 className="text-3xl font-semibold mb-6">Chat With AI Coach</h1>
 
       {/* Chat Container */}
       <div className="w-full max-w-lg h-[500px] overflow-y-auto bg-[#1A1A2E] border border-[#3F3D56] rounded-lg p-4 shadow-lg">

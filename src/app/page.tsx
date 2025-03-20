@@ -26,8 +26,8 @@ export default function Home() {
         <nav className="hidden md:flex space-x-4">
           <Link href="/about" className="text-[#6C63FF] hover:underline">Learn More</Link>
           <Link href="/chat" className="text-[#FF6584] hover:underline">Chat Now</Link>
-          <Link href="/auth/signin" className="text-[#B8C1EC] hover:underline">Sign In</Link>
-          <Link href="/auth/signup" className="text-[#B8C1EC] hover:underline">Sign Up</Link>
+          <Link href="/auth/signin" className="text-[#B8C1EC] hover:underline">Sign In/Sign Up</Link>
+          {/* <Link href="/auth/signup" className="text-[#B8C1EC] hover:underline">Sign Up</Link> */}
         </nav>
       </header>
       

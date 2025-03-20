@@ -84,9 +84,14 @@ GOOGLE_CLIENT_SECRET=your_google_client_secret
 # Facebook OAuth
 FACEBOOK_CLIENT_ID=your_facebook_client_id
 FACEBOOK_CLIENT_SECRET=your_facebook_client_secret
+
+# AI API KEYS
+OPENAI_API_KEY=Your_open_ai_key
+MISTRAL_API_KEY=Your_Mistral_ai_api_key
+
 ```
 
-Replace your_*_id and your_*_secret with the actual values from Google and Facebook developer portals.
+Replace your_*_id, your_*_secret, and your_*_key with the actual values from Google and Facebook developer portals.
 
 ### 4️⃣ Run the Development Server
 

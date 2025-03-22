@@ -1,102 +1,101 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react"; // For mobile menu icons
+import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const pathname = usePathname(); // Highlight active page
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+  const pathname = usePathname();
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "About", href: "/about" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Blog", href: "/blog" },
-    { name: "Contact", href: "/contact" },
-  ];
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolling(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="bg-gray-900 border-b border-gray-700 text-white">
-      <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Brand Logo */}
-        <Link href="/">
-          <span className="text-xl font-bold tracking-wide text-cyan-400">
-            Mentor@
-          </span>
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolling ? "bg-[#121212] shadow-lg" : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/" className="text-2xl font-bold text-[#6C63FF]">
+          Mentor@
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={`hover:text-cyan-400 ${
-                pathname === link.href ? "text-cyan-300 font-semibold" : ""
-              }`}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex space-x-8 text-[#B8C1EC]">
+          <NavLink href="/" text="Home" pathname={pathname} />
+          <NavLink href="/about" text="About" pathname={pathname} />
+          <NavLink href="/pricing" text="Pricing" pathname={pathname} />
+          <NavLink href="/blog" text="Blog" pathname={pathname} />
+          <NavLink href="/contact" text="Contact" pathname={pathname} />
+        </nav>
 
-        {/* CTA Buttons */}
-        <div className="hidden md:flex space-x-4">
+        {/* Account Actions */}
+        <div className="hidden md:flex items-center space-x-4">
           <Link
             href="/signin"
-            className="px-4 py-2 text-sm bg-transparent border border-cyan-400 hover:bg-cyan-400 hover:text-gray-900 rounded"
+            className="text-[#B8C1EC] hover:text-[#6C63FF] transition"
           >
-            Sign In
+            Log In
           </Link>
           <Link
             href="/signup"
-            className="px-4 py-2 text-sm bg-cyan-400 hover:bg-cyan-500 text-gray-900 rounded"
+            className="bg-[#6C63FF] text-white px-5 py-2 rounded-full shadow hover:bg-[#554ED1] transition"
           >
-            Get Started
+            Sign Up
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden focus:outline-none"
+          className="md:hidden text-[#B8C1EC] text-2xl"
+          onClick={() => setMenuOpen(!menuOpen)}
         >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
+          {menuOpen ? <IoMdClose /> : <IoMdMenu />}
         </button>
       </div>
 
-      {/* Mobile Navigation */}
-      {isOpen && (
-        <div className="md:hidden bg-gray-800 py-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="block px-6 py-2 text-white hover:bg-gray-700"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-[#121212] text-white py-6 px-6 absolute top-full left-0 w-full shadow-lg">
+          <NavLink href="/" text="Home" pathname={pathname} onClick={() => setMenuOpen(false)} />
+          <NavLink href="/about" text="About" pathname={pathname} onClick={() => setMenuOpen(false)} />
+          <NavLink href="/pricing" text="Pricing" pathname={pathname} onClick={() => setMenuOpen(false)} />
+          <NavLink href="/blog" text="Blog" pathname={pathname} onClick={() => setMenuOpen(false)} />
+          <NavLink href="/contact" text="Contact" pathname={pathname} onClick={() => setMenuOpen(false)} />
+          <div className="mt-4 flex flex-col space-y-4">
+            <Link href="/signin" className="text-center text-[#B8C1EC] hover:text-[#6C63FF]" onClick={() => setMenuOpen(false)}>
+              Log In
             </Link>
-          ))}
-          <div className="mt-2 px-6">
-            <Link
-              href="/signin"
-              className="block w-full text-center py-2 border border-cyan-400 text-cyan-400 rounded hover:bg-cyan-400 hover:text-gray-900"
-            >
-              Sign In
-            </Link>
-            <Link
-              href="/signup"
-              className="block w-full text-center py-2 mt-2 bg-cyan-400 text-gray-900 rounded hover:bg-cyan-500"
-            >
-              Get Started
+            <Link href="/signup" className="text-center bg-[#6C63FF] text-white px-5 py-2 rounded-full shadow hover:bg-[#554ED1] transition" onClick={() => setMenuOpen(false)}>
+              Sign Up
             </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 };
+
+/* Reusable NavLink Component */
+const NavLink = ({ href, text, pathname, onClick }: { href: string; text: string; pathname: string; onClick?: () => void }) => (
+  <Link
+    href={href}
+    onClick={onClick}
+    className={`px-1 hover:text-[#6C63FF] transition ${
+      pathname === href ? "text-[#6C63FF] font-semibold" : "text-[#B8C1EC]"
+    }`}
+  >
+    {text}
+  </Link>
+);
 
 export default Navbar;

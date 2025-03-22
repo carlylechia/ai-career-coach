@@ -1,46 +1,86 @@
 import Link from "next/link";
+import { FaTwitter, FaLinkedin, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-gray-400 py-8 border-t border-gray-700">
-      <div className="container mx-auto px-6 text-center">
-        <p className="text-lg font-semibold text-cyan-400">Mentor@</p>
-        <p className="mt-2 text-sm">
-          Empowering careers & mindsets for a better future.
-        </p>
-
-        {/* Navigation Links */}
-        <div className="mt-4 flex justify-center space-x-6">
-          <Link href="/about" className="hover:text-cyan-400">
-            About
-          </Link>
-          <Link href="/pricing" className="hover:text-cyan-400">
-            Pricing
-          </Link>
-          <Link href="/blog" className="hover:text-cyan-400">
-            Blog
-          </Link>
-          <Link href="/contact" className="hover:text-cyan-400">
-            Contact
-          </Link>
+    <footer className="bg-[#121212] text-[#B8C1EC] py-8 px-6">
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center">
+        {/* Left - Brand Info */}
+        <div className="text-center md:text-left">
+          <h2 className="text-xl font-semibold text-[#6C63FF]">Mentor@</h2>
+          <p className="text-sm text-[#A6A6A6] mt-2">
+            Your AI-powered career & mindset coaching platform.
+          </p>
         </div>
 
-        {/* Social Links */}
-        <div className="mt-4 flex justify-center space-x-4">
-          <a href="#" className="hover:text-cyan-400">
-            Twitter
+        {/* Center - Navigation Links */}
+        <nav className="mt-6 md:mt-0">
+          <ul className="flex flex-wrap justify-center md:justify-start gap-6">
+            <li>
+              <Link
+                href="/about"
+                className="hover:text-[#6C63FF] transition duration-300"
+              >
+                About
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/blog"
+                className="hover:text-[#6C63FF] transition duration-300"
+              >
+                Blog
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/pricing"
+                className="hover:text-[#6C63FF] transition duration-300"
+              >
+                Pricing
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="hover:text-[#6C63FF] transition duration-300"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Right - Social Links */}
+        <div className="mt-6 md:mt-0 flex space-x-4">
+          <a
+            href="mailto:support@mentorapp.com"
+            className="text-[#B8C1EC] hover:text-[#FF6584] transition"
+          >
+            <FaEnvelope size={20} />
           </a>
-          <a href="#" className="hover:text-cyan-400">
-            LinkedIn
+          <a
+            href="https://twitter.com/MentorApp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#B8C1EC] hover:text-[#6C63FF] transition"
+          >
+            <FaTwitter size={20} />
           </a>
-          <a href="#" className="hover:text-cyan-400">
-            Facebook
+          <a
+            href="https://linkedin.com/company/mentorapp"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#B8C1EC] hover:text-[#6C63FF] transition"
+          >
+            <FaLinkedin size={20} />
           </a>
         </div>
+      </div>
 
-        <p className="mt-4 text-xs">
-          © {new Date().getFullYear()} Mentor@. All Rights Reserved.
-        </p>
+      {/* Bottom Section */}
+      <div className="mt-6 text-center text-xs text-[#A6A6A6]">
+        &copy; {new Date().getFullYear()} Mentor@. All rights reserved.
       </div>
     </footer>
   );

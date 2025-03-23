@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Layout from "../components/layout/Layout";
 
 export default function Chat() {
   const [input, setInput] = useState<string>("");
@@ -51,6 +52,7 @@ export default function Chat() {
   }
 
   return (
+    <Layout noLayout={true}>
     <main className="flex flex-col items-center justify-center min-h-screen bg-[#121212] p-6 text-[#B8C1EC]">
       <div className="absolute top-4 left-4">
         <Link
@@ -99,5 +101,6 @@ export default function Chat() {
         </button>
       </div>
     </main>
+    </Layout>
   );
 }

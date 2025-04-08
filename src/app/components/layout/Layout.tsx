@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
+import FloatingChatButton from "../FloatingChatButton";
 
 interface LayoutProps {
   children: ReactNode;
@@ -15,7 +16,10 @@ const Layout = ({ children, noLayout }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-gray-900 text-white">{children}</main>
+      <main className="min-h-screen bg-gray-900 text-white">
+        {children}
+        <FloatingChatButton />
+      </main>
       <Footer />
     </>
   );
